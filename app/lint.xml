@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Desactivar NewApi para java.time porque usamos desugaring -->
+    <issue id="NewApi" severity="informational">
+        <ignore regexp="java\.time\..*" />
+        <ignore path="**/model/Pedido.kt" />
+        <ignore path="**/service/*.kt" />
+    </issue>
+
+    <!-- Permitir APIs experimentales de Material 3 -->
+    <issue id="ExperimentalAnnotationRetention" severity="ignore" />
+</lint>
+
