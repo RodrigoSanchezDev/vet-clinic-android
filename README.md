@@ -709,35 +709,3 @@ copies or substantial portions of the Software.
 
 </div>
 
-## 🖼️ Capturas de Pantalla
-
-### Pantalla de Bienvenida
-![Intro](docs/screenshots/intro.png)
-
-### Dashboard Principal
-![Dashboard](docs/screenshots/dashboard.png)
-
-### Registro Exitoso
-![Registro Completo](docs/screenshots/register-success.png)
-
-> Las capturas muestran el flujo completo desde la bienvenida hasta el registro exitoso de consultas.
-
-## 🛣️ Roadmap
-- Persistencia local (Room o DataStore) para historiales entre sesiones.
-- Integración REST para agenda de veterinarios y stock real de medicamentos.
-- Tests instrumentados de flujos Compose y pruebas unitarias para servicios.
-- Dark theme y adaptaciones para tablets/foldables.
-
-## 🤝 Contribuciones
-1. Haz un fork y crea una rama descriptiva (`feature/nueva-funcionalidad`).
-2. Añade pruebas o demo en `docs/` cuando corresponda.
-3. Ejecuta `./gradlew lint assembleDebug` antes de abrir el PR.
-4. Describe claramente el problema que resuelves o la feature que agregas.
-
-## 👤 Autor
-**Rodrigo Sánchez**  
-Email: [rodrigo@sanchezdev.com](mailto:rodrigo@sanchezdev.com)  
-Portafolio: [sanchezdev.com](https://sanchezdev.com)
-
-## 📄 Licencia
-Este proyecto se distribuye bajo la [MIT License](./LICENSE).
