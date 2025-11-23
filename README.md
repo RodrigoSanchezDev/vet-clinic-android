@@ -932,58 +932,6 @@ chore:    Tareas de mantenimiento
 
 ---
 
-## 👨‍💻 Autor
-
-<div align="center">
-
-### Rodrigo Sánchez
-
-[![Email](https://img.shields.io/badge/Email-rodrigo%40sanchezdev.com-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:rodrigo@sanchezdev.com)
-[![Website](https://img.shields.io/badge/Website-sanchezdev.com-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](https://sanchezdev.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/RodrigoSanchezDev)
-
-**Desarrollador Android Senior** especializado en Kotlin y Jetpack Compose
-
----
-
-### 📊 Estadísticas del Proyecto
-
-```
-📅 Última actualización: 23 de Noviembre, 2025
-📱 Versión: 1.1.0
-🏆 Cumplimiento académico: 100% (6/6 requisitos)
-🎨 Pantallas: 19 screens funcionando
-📦 Componentes: 15+ componentes reutilizables
-🎬 Animaciones: 15+ microinteracciones
-💾 Datos pre-cargados: 5 consultas, 7 mascotas, 7 dueños, 3 veterinarios
-🎨 Colores: 12+ tonalidades vibrantes
-⚡ Performance: 60fps consistente
-📐 Líneas de código: ~6,000+
-📝 Archivos Kotlin: 41+ archivos
-🔧 Servicios: 8 servicios de negocio
-🎯 Modelos: 8+ entidades de datos
-🛠️ Utilidades: 5 archivos de helpers
-📚 Documentación: Completa y profesional
-✅ Build Status: SUCCESSFUL (Sin errores)
-```
-
-### 📈 Métricas de Calidad
-
-| Métrica | Valor | Estado |
-|---------|-------|--------|
-| **Compilación** | BUILD SUCCESSFUL | ✅ |
-| **Errores** | 0 | ✅ |
-| **Warnings críticos** | 0 | ✅ |
-| **Requisitos cumplidos** | 6/6 (100%) | ✅ |
-| **Pantallas funcionales** | 19/19 | ✅ |
-| **Servicios integrados** | 8/8 | ✅ |
-| **Modularización** | Completa | ✅ |
-| **Documentación** | Exhaustiva | ✅ |
-
-</div>
-
----
 
 ## 📝 Changelog - Últimas Actualizaciones
 
@@ -1195,6 +1143,58 @@ Más allá de los requisitos mínimos:
 
 ---
 
+## 👨‍💻 Autor
+
+<div align="center">
+
+### Rodrigo Sánchez
+
+[![Email](https://img.shields.io/badge/Email-rodrigo%40sanchezdev.com-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:rodrigo@sanchezdev.com)
+[![Website](https://img.shields.io/badge/Website-sanchezdev.com-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](https://sanchezdev.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/RodrigoSanchezDev)
+
+**Desarrollador Android Senior** especializado en Kotlin y Jetpack Compose
+
+---
+
+### 📊 Estadísticas del Proyecto
+
+```
+📅 Última actualización: 23 de Noviembre, 2025
+📱 Versión: 1.1.0
+🏆 Cumplimiento académico: 100% (6/6 requisitos)
+🎨 Pantallas: 19 screens funcionando
+📦 Componentes: 15+ componentes reutilizables
+🎬 Animaciones: 15+ microinteracciones
+💾 Datos pre-cargados: 5 consultas, 7 mascotas, 7 dueños, 3 veterinarios
+🎨 Colores: 12+ tonalidades vibrantes
+⚡ Performance: 60fps consistente
+📐 Líneas de código: ~6,000+
+📝 Archivos Kotlin: 41+ archivos
+🔧 Servicios: 8 servicios de negocio
+🎯 Modelos: 8+ entidades de datos
+🛠️ Utilidades: 5 archivos de helpers
+📚 Documentación: Completa y profesional
+✅ Build Status: SUCCESSFUL (Sin errores)
+```
+
+### 📈 Métricas de Calidad
+
+| Métrica | Valor | Estado |
+|---------|-------|--------|
+| **Compilación** | BUILD SUCCESSFUL | ✅ |
+| **Errores** | 0 | ✅ |
+| **Warnings críticos** | 0 | ✅ |
+| **Requisitos cumplidos** | 6/6 (100%) | ✅ |
+| **Pantallas funcionales** | 19/19 | ✅ |
+| **Servicios integrados** | 8/8 | ✅ |
+| **Modularización** | Completa | ✅ |
+| **Documentación** | Exhaustiva | ✅ |
+
+</div>
+
+---
 
 ## 📄 Licencia
 
