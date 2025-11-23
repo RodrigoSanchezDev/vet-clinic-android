@@ -41,10 +41,10 @@ private val LightColorScheme = lightColorScheme(
     primary = VetPrimary,
     onPrimary = VetTextOnPrimary,
     primaryContainer = VetPrimaryLight,
-    onPrimaryContainer = VetTextPrimary,
+    onPrimaryContainer = VetTextOnPrimary,
 
     secondary = VetSecondary,
-    onSecondary = VetTextOnPrimary,
+    onSecondary = VetTextPrimary,
     secondaryContainer = VetSecondaryLight,
     onSecondaryContainer = VetTextPrimary,
 
@@ -55,7 +55,7 @@ private val LightColorScheme = lightColorScheme(
 
     background = VetBackground,
     onBackground = VetTextPrimary,
-    surface = VetSurface,
+    surface = VetCardBackground,
     onSurface = VetTextPrimary,
     surfaceVariant = VetSurfaceVariant,
     onSurfaceVariant = VetTextSecondary,
@@ -63,7 +63,8 @@ private val LightColorScheme = lightColorScheme(
     error = VetError,
     onError = VetTextOnPrimary,
 
-    outline = Color(0xFFBDBDBD)
+    outline = Color(0xFFD1D5DB),
+    outlineVariant = Color(0xFFE5E7EB)
 )
 
 @Composable

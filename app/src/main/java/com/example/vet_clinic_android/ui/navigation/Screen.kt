@@ -11,6 +11,9 @@ sealed class Screen(val route: String) {
     // Pantalla Principal
     object Home : Screen("home")
 
+    // Pantalla de Resumen con Estadísticas (Requisito Semana 4)
+    object Resumen : Screen("resumen")
+
     // Gestión de Consultas (Paso 1 y 2)
     object RegisterConsulta : Screen("register_consulta")
     object ListConsultas : Screen("list_consultas")

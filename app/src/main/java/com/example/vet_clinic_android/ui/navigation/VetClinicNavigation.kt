@@ -29,6 +29,10 @@ fun VetClinicNavigation() {
             HomeScreen(navController = navController)
         }
 
+        composable(Screen.Resumen.route) {
+            ResumenScreen(navController = navController, viewModel = viewModel)
+        }
+
         composable(Screen.RegisterConsulta.route) {
             RegisterConsultaScreen(navController = navController, viewModel = viewModel)
         }

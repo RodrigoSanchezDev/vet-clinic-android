@@ -17,6 +17,21 @@ import com.example.vet_clinic_android.util.validarEmail
 
 class DuenoService {
 
+    private val duenos = mutableListOf<Dueno>()
+
+    init {
+        // Cargar dueños de ejemplo
+        duenos.addAll(listOf(
+            Dueno("María González", "+56912345678", "maria.gonzalez@email.com", "Av. Providencia 123", "12.345.678-9"),
+            Dueno("Carlos Rodríguez", "+56987654321", "carlos.r@email.com", "Los Leones 456", "23.456.789-0"),
+            Dueno("Ana Martínez", "+56998765432", "ana.martinez@email.com", "Las Condes 789", "34.567.890-1"),
+            Dueno("Pedro Silva", "+56976543210", "pedro.silva@email.com", "Vitacura 321", "45.678.901-2"),
+            Dueno("Laura Fernández", "+56965432109", "laura.f@email.com", "Ñuñoa 654", "56.789.012-3"),
+            Dueno("Roberto Pérez", "+56954321098", "roberto.perez@email.com", "La Reina 987", "67.890.123-4"),
+            Dueno("Carolina López", "+56943210987", "carolina.l@email.com", "Maipú 159", "78.901.234-5")
+        ))
+    }
+
     /**
      * Registra un nuevo dueño con validación Regex
      * - Email: valida formato nombre@dominio.com
@@ -100,5 +115,17 @@ class DuenoService {
         println("└─────────────────────────────────────────┘")
         // Usar método POO de la clase Usuario (heredado por Dueno)
         println(dueno.mostrarInformacion().prependIndent("  "))
+    }
+
+    /**
+     * Obtiene todos los dueños registrados
+     */
+    fun obtenerTodosDuenos(): List<Dueno> = duenos.toList()
+
+    /**
+     * Agrega un dueño a la lista
+     */
+    fun agregarDueno(dueno: Dueno) {
+        duenos.add(dueno)
     }
 }

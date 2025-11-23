@@ -14,6 +14,21 @@ import com.example.vet_clinic_android.util.solicitarDecimalEnRango
 
 class MascotaService {
 
+    private val mascotas = mutableListOf<Mascota>()
+
+    init {
+        // Cargar mascotas de ejemplo
+        mascotas.addAll(listOf(
+            Mascota("Luna", "Perro", 3, 12.5, "Labrador", "Dorado", "Hembra"),
+            Mascota("Max", "Gato", 5, 4.8, "Persa", "Blanco", "Macho"),
+            Mascota("Rocky", "Perro", 7, 28.0, "Pastor Alemán", "Negro y café", "Macho"),
+            Mascota("Mimi", "Gato", 2, 3.5, "Siamés", "Crema", "Hembra"),
+            Mascota("Bobby", "Perro", 1, 8.0, "Beagle", "Tricolor", "Macho"),
+            Mascota("Coco", "Gato", 4, 5.2, "Angora", "Gris", "Hembra"),
+            Mascota("Thor", "Perro", 6, 35.0, "Rottweiler", "Negro", "Macho")
+        ))
+    }
+
     fun registrarMascota(): Mascota {
         println("\n╔═══════════════════════════════════════╗")
         println("║    REGISTRO DE NUEVA MASCOTA          ║")
@@ -38,5 +53,17 @@ class MascotaService {
     fun mostrarDetallesMascota(mascota: Mascota) {
         // Usar método POO de la clase Mascota
         println(mascota.mostrarInformacion())
+    }
+
+    /**
+     * Obtiene todas las mascotas registradas
+     */
+    fun obtenerTodasMascotas(): List<Mascota> = mascotas.toList()
+
+    /**
+     * Agrega una mascota a la lista
+     */
+    fun agregarMascota(mascota: Mascota) {
+        mascotas.add(mascota)
     }
 }

@@ -2,40 +2,47 @@ package com.example.vet_clinic_android.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Colores principales para Clínica Veterinaria
-val VetPrimary = Color(0xFF2E7D32) // Verde oscuro profesional
-val VetPrimaryLight = Color(0xFF60AD5E) // Verde claro
-val VetPrimaryDark = Color(0xFF005005) // Verde muy oscuro
+// Colores principales para Clínica Veterinaria - Diseño Moderno
+// Inspirado en apps modernas de pet care
 
-val VetSecondary = Color(0xFF1976D2) // Azul confiable
-val VetSecondaryLight = Color(0xFF63A4FF)
-val VetSecondaryDark = Color(0xFF004BA0)
+// Morado vibrante principal (inspirado en la imagen)
+val VetPrimary = Color(0xFF5B21B6) // Morado vibrante principal
+val VetPrimaryLight = Color(0xFF7C3AED) // Morado claro
+val VetPrimaryDark = Color(0xFF4C1D95) // Morado oscuro
 
-val VetTertiary = Color(0xFFFF6F00) // Naranja cálido para urgencias
-val VetTertiaryLight = Color(0xFFFFA040)
-val VetTertiaryDark = Color(0xFFC43E00)
+// Naranja/Dorado para acentos
+val VetSecondary = Color(0xFFF59E0B) // Naranja/dorado vibrante
+val VetSecondaryLight = Color(0xFFFBBF24)
+val VetSecondaryDark = Color(0xFFD97706)
 
-// Colores de fondo
-val VetBackground = Color(0xFFF5F5F5)
-val VetSurface = Color(0xFFFFFFFF)
-val VetSurfaceVariant = Color(0xFFE8F5E9)
+// Rosa/Magenta para variedad
+val VetTertiary = Color(0xFFEC4899) // Rosa vibrante
+val VetTertiaryLight = Color(0xFFF472B6)
+val VetTertiaryDark = Color(0xFFDB2777)
+
+// Colores de fondo - Fondos claros y suaves
+val VetBackground = Color(0xFFF8FAFC) // Gris muy claro, casi blanco
+val VetSurface = Color(0xFFFFFFFF) // Blanco puro
+val VetSurfaceVariant = Color(0xFFF1F5F9) // Gris claro suave
+
+// Cards y contenedores
+val VetCardBackground = Color(0xFFFFFFFF)
+val VetCardSecondary = Color(0xFFF3F4F6)
 
 // Colores de texto
-val VetTextPrimary = Color(0xFF212121)
-val VetTextSecondary = Color(0xFF757575)
-val VetTextOnPrimary = Color(0xFFFFFFFF)
+val VetTextPrimary = Color(0xFF1F2937) // Gris oscuro para texto principal
+val VetTextSecondary = Color(0xFF6B7280) // Gris medio para texto secundario
+val VetTextOnPrimary = Color(0xFFFFFFFF) // Blanco sobre colores primarios
+val VetTextOnSecondary = Color(0xFF1F2937) // Oscuro sobre colores claros
 
-// Colores de estado
-val VetSuccess = Color(0xFF4CAF50)
-val VetWarning = Color(0xFFFF9800)
-val VetError = Color(0xFFF44336)
-val VetInfo = Color(0xFF2196F3)
+// Colores de estado - Modernos y suaves
+val VetSuccess = Color(0xFF10B981) // Verde esmeralda
+val VetWarning = Color(0xFFF59E0B) // Ámbar
+val VetError = Color(0xFFEF4444) // Rojo coral
+val VetInfo = Color(0xFF3B82F6) // Azul brillante
 
-// Colores legacy para compatibilidad
-val Purple80 = VetPrimaryLight
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
-
-val Purple40 = VetPrimary
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+// Colores adicionales para iconos y detalles
+val VetAccent1 = Color(0xFF8B5CF6) // Morado medio
+val VetAccent2 = Color(0xFF06B6D4) // Cyan
+val VetAccent3 = Color(0xFFEC4899) // Rosa
+val VetAccent4 = Color(0xFFF59E0B) // Naranja

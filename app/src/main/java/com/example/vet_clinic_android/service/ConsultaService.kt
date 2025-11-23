@@ -23,6 +23,91 @@ class ConsultaService {
     // Arreglo para almacenar todas las consultas registradas
     private val consultasRegistradas = mutableListOf<ConsultaCompleta>()
 
+    init {
+        // Cargar consultas de ejemplo al inicializar
+        cargarConsultasDeEjemplo()
+    }
+
+    /**
+     * Carga consultas de ejemplo para demostración
+     */
+    private fun cargarConsultasDeEjemplo() {
+        // Veterinario de ejemplo
+        val vet1 = Veterinario(nombre = "Dr. Juan Pérez", especialidad = "Medicina General")
+        val vet2 = Veterinario(nombre = "Dra. María Silva", especialidad = "Cirugía")
+        val vet3 = Veterinario(nombre = "Dr. Carlos López", especialidad = "Emergencias")
+
+        // Consulta 1: Control rutinario
+        val mascota1 = Mascota("Luna", "Perro", 3, 12.5, "Labrador", "Dorado", "Hembra")
+        val dueno1 = Dueno("María González", "+56912345678", "maria.gonzalez@email.com", "Av. Providencia 123", "12.345.678-9")
+        val consulta1 = Consulta(
+            idConsulta = 1001,
+            descripcion = "Control de rutina y vacunación anual",
+            costoConsulta = 18000.0,
+            estado = "Completada",
+            tipoServicio = "Control",
+            fechaHora = "2025-11-20 10:00",
+            comentariosAdicionales = "Mascota en excelente estado de salud"
+        )
+        consultasRegistradas.add(ConsultaCompleta(consulta1, dueno1, mascota1, vet1, "2025-11-20 10:00"))
+
+        // Consulta 2: Emergencia
+        val mascota2 = Mascota("Max", "Gato", 5, 4.8, "Persa", "Blanco", "Macho")
+        val dueno2 = Dueno("Carlos Rodríguez", "+56987654321", "carlos.r@email.com", "Los Leones 456", "23.456.789-0")
+        val consulta2 = Consulta(
+            idConsulta = 1002,
+            descripcion = "Emergencia: Intoxicación alimentaria",
+            costoConsulta = 50000.0,
+            estado = "Completada",
+            tipoServicio = "Emergencia",
+            fechaHora = "2025-11-21 15:30",
+            comentariosAdicionales = "Tratamiento exitoso, mascota recuperada"
+        )
+        consultasRegistradas.add(ConsultaCompleta(consulta2, dueno2, mascota2, vet3, "2025-11-21 15:30"))
+
+        // Consulta 3: Cirugía menor
+        val mascota3 = Mascota("Rocky", "Perro", 7, 28.0, "Pastor Alemán", "Negro y café", "Macho")
+        val dueno3 = Dueno("Ana Martínez", "+56998765432", "ana.martinez@email.com", "Las Condes 789", "34.567.890-1")
+        val consulta3 = Consulta(
+            idConsulta = 1003,
+            descripcion = "Extracción de masa cutánea",
+            costoConsulta = 80000.0,
+            estado = "Completada",
+            tipoServicio = "Cirugía Menor",
+            fechaHora = "2025-11-22 09:00",
+            comentariosAdicionales = "Procedimiento exitoso, resultados de biopsia benignos"
+        )
+        consultasRegistradas.add(ConsultaCompleta(consulta3, dueno3, mascota3, vet2, "2025-11-22 09:00"))
+
+        // Consulta 4: Consulta general pendiente
+        val mascota4 = Mascota("Mimi", "Gato", 2, 3.5, "Siamés", "Crema", "Hembra")
+        val dueno4 = Dueno("Pedro Silva", "+56976543210", "pedro.silva@email.com", "Vitacura 321", "45.678.901-2")
+        val consulta4 = Consulta(
+            idConsulta = 1004,
+            descripcion = "Revisión por pérdida de apetito",
+            costoConsulta = 25000.0,
+            estado = "Pendiente",
+            tipoServicio = "Consulta General",
+            fechaHora = "2025-11-25 14:00",
+            comentariosAdicionales = null
+        )
+        consultasRegistradas.add(ConsultaCompleta(consulta4, dueno4, mascota4, vet1, "2025-11-25 14:00"))
+
+        // Consulta 5: Desparasitación
+        val mascota5 = Mascota("Bobby", "Perro", 1, 8.0, "Beagle", "Tricolor", "Macho")
+        val dueno5 = Dueno("Laura Fernández", "+56965432109", "laura.f@email.com", "Ñuñoa 654", "56.789.012-3")
+        val consulta5 = Consulta(
+            idConsulta = 1005,
+            descripcion = "Desparasitación preventiva",
+            costoConsulta = 12000.0,
+            estado = "Completada",
+            tipoServicio = "Desparasitación",
+            fechaHora = "2025-11-23 11:30",
+            comentariosAdicionales = "Próxima desparasitación en 3 meses"
+        )
+        consultasRegistradas.add(ConsultaCompleta(consulta5, dueno5, mascota5, vet1, "2025-11-23 11:30"))
+    }
+
     private val tiposServicio = mapOf(
         1 to Pair("Consulta General", 25000.0),
         2 to Pair("Vacunación", 15000.0),
