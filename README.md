@@ -1316,86 +1316,9 @@ chore:    Tareas de mantenimiento
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/RodrigoSanchezDev)
 
-**Desarrollador Android Senior** especializado en Kotlin y Jetpack Compose
+**Desarrollador Android ** especializado en Kotlin y Jetpack Compose
 
 ---
-
-### 📊 Estadísticas del Proyecto
-
-```
-📅 Última actualización: 23 de Noviembre, 2025
-📱 Versión: 1.1.0
-🏆 Cumplimiento académico: 100% (6/6 requisitos)
-🎨 Pantallas: 19 screens funcionando
-📦 Componentes: 15+ componentes reutilizables
-🎬 Animaciones: 15+ microinteracciones
-💾 Datos pre-cargados: 5 consultas, 7 mascotas, 7 dueños, 3 veterinarios
-🎨 Colores: 12+ tonalidades vibrantes
-⚡ Performance: 60fps consistente
-📐 Líneas de código: ~6,000+
-📝 Archivos Kotlin: 41+ archivos
-🔧 Servicios: 8 servicios de negocio
-🎯 Modelos: 8+ entidades de datos
-🛠️ Utilidades: 5 archivos de helpers
-📚 Documentación: Completa y profesional
-✅ Build Status: SUCCESSFUL (Sin errores)
-```
-
-### 📈 Métricas de Calidad
-
-| Métrica | Valor | Estado |
-|---------|-------|--------|
-| **Compilación** | BUILD SUCCESSFUL | ✅ |
-| **Errores** | 0 | ✅ |
-| **Warnings críticos** | 0 | ✅ |
-| **Requisitos cumplidos** | 6/6 (100%) | ✅ |
-| **Pantallas funcionales** | 19/19 | ✅ |
-| **Servicios integrados** | 8/8 | ✅ |
-| **Modularización** | Completa | ✅ |
-| **Documentación** | Exhaustiva | ✅ |
-
-</div>
-
----
-
-## 📄 Licencia
-
-Este proyecto está licenciado bajo la **MIT License**.
-
-```
-MIT License
-
-Copyright (c) 2025 Rodrigo Sánchez
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-```
-
-Ver el archivo [LICENSE](./LICENSE) para más detalles.
-
----
-
-## 🙏 Agradecimientos
-
-- **Material Design Team** por el sistema de diseño
-- **JetBrains** por Kotlin y herramientas excepcionales
-- **Google Android Team** por Jetpack Compose
-- **Comunidad Open Source** por librerías y soporte
-
----
-
-<div align="center">
-
-### ⭐ Si este proyecto te fue útil, considera darle una estrella
-
-**Desarrollado con ❤️ usando Kotlin y Jetpack Compose**
 
 [🔝 Volver arriba](#-vet-clinic-android)
 
