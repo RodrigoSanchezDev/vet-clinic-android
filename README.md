@@ -981,6 +981,8 @@ chore:    Tareas de mantenimiento
 | **Modularización** | Completa | ✅ |
 | **Documentación** | Exhaustiva | ✅ |
 
+</div>
+
 ---
 
 ## 📝 Changelog - Últimas Actualizaciones
@@ -1253,72 +1255,44 @@ Más allá de los requisitos mínimos:
 
 ---
 
-## 🤝 Contribuciones
+## 📄 Licencia
 
-Las contribuciones son bienvenidas y apreciadas. Para contribuir:
-
-### Proceso de Contribución
-
-1. **Fork** el repositorio
-2. Crear una rama descriptiva:
-   ```bash
-   git checkout -b feature/nueva-funcionalidad
-   ```
-3. Hacer commits semánticos:
-   ```bash
-   git commit -m "feat: agregar búsqueda de mascotas"
-   ```
-4. Push a la rama:
-   ```bash
-   git push origin feature/nueva-funcionalidad
-   ```
-5. Abrir un **Pull Request** con descripción detallada
-
-### Guías de Estilo
-
-```kotlin
-// ✅ Buenas prácticas
-- Nombres descriptivos en español para dominio
-- Documentación KDoc en funciones públicas
-- Composables con preview
-- Manejo de errores explícito
-- StateFlow para estados reactivos
-
-// ❌ Evitar
-- Lógica de negocio en Composables
-- Strings hardcodeados (usar strings.xml)
-- Composables sin parámetros por defecto
-- Uso de !! (null assertion)
-```
-
-### Tipos de Commits (Conventional Commits)
+Este proyecto está licenciado bajo la **MIT License**.
 
 ```
-feat:     Nueva funcionalidad
-fix:      Corrección de bug
-docs:     Cambios en documentación
-style:    Formato de código
-refactor: Refactorización
-test:     Tests
-chore:    Tareas de mantenimiento
+MIT License
+
+Copyright (c) 2025 Rodrigo Sánchez
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 ```
+
+Ver el archivo [LICENSE](./LICENSE) para más detalles.
 
 ---
 
-## 👨‍💻 Autor
+## 🙏 Agradecimientos
+
+- **Material Design Team** por el sistema de diseño
+- **JetBrains** por Kotlin y herramientas excepcionales
+- **Google Android Team** por Jetpack Compose
+- **Comunidad Open Source** por librerías y soporte
+
+---
 
 <div align="center">
 
-### Rodrigo Sánchez
+### ⭐ Si este proyecto te fue útil, considera darle una estrella
 
-[![Email](https://img.shields.io/badge/Email-rodrigo%40sanchezdev.com-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:rodrigo@sanchezdev.com)
-[![Website](https://img.shields.io/badge/Website-sanchezdev.com-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](https://sanchezdev.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/RodrigoSanchezDev)
-
-**Desarrollador Android ** especializado en Kotlin y Jetpack Compose
-
----
+**Desarrollado con ❤️ usando Kotlin y Jetpack Compose**
 
 [🔝 Volver arriba](#-vet-clinic-android)
 
