@@ -545,6 +545,8 @@ class ConsultaService {
 
     fun crearConsultaInteractiva(): Consulta {
         val descripcion = solicitarTexto("Descripción de la consulta: ")
+        // Número de mascotas para consultas múltiples (funcionalidad futura)
+        @Suppress("UNUSED_VARIABLE")
         val numeroMascotas = solicitarEnteroEnRango("Número de mascotas", 1..5)
         val tiempoEstimado = solicitarEnteroEnRango("Tiempo estimado (minutos)", 10..120)
 

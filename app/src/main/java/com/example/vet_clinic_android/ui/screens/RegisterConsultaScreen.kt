@@ -112,8 +112,6 @@ fun MascotaFormStep(
 
     // Estados de validación
     var nombreError by remember { mutableStateOf<String?>(null) }
-    var edadError by remember { mutableStateOf<String?>(null) }
-    var pesoError by remember { mutableStateOf<String?>(null) }
 
     val especies = listOf("Perro", "Gato", "Conejo", "Ave", "Otro")
 

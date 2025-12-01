@@ -22,6 +22,7 @@ import com.example.vet_clinic_android.ui.viewmodels.VetClinicViewModel
 @Composable
 fun GestionMedicamentosScreen(
     navController: NavController,
+    @Suppress("UNUSED_PARAMETER")
     viewModel: VetClinicViewModel = viewModel()
 ) {
     val scrollState = rememberScrollState()
@@ -382,6 +383,7 @@ fun ReflectionScreen(
 @Composable
 fun ReporteCompletoScreen(
     navController: NavController,
+    @Suppress("UNUSED_PARAMETER")
     viewModel: VetClinicViewModel = viewModel()
 ) {
     val scrollState = rememberScrollState()

@@ -71,6 +71,20 @@ class VetClinicViewModel : ViewModel() {
     private val _estadisticas = MutableStateFlow(ResumenEstadisticas())
     val estadisticas: StateFlow<ResumenEstadisticas> = _estadisticas.asStateFlow()
 
+    /**
+     * 🎬 Estado de carga para indicadores de progreso
+     * Controla la visibilidad del loading indicator en la UI
+     */
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
+    /**
+     * 🎬 Mensaje de carga personalizado
+     * Muestra el estado actual de la operación en progreso
+     */
+    private val _loadingMessage = MutableStateFlow("Cargando...")
+    val loadingMessage: StateFlow<String> = _loadingMessage.asStateFlow()
+
     // ============================================================================
     // DATA CLASSES PARA ESTADOS
     // ============================================================================
@@ -268,6 +282,13 @@ class VetClinicViewModel : ViewModel() {
     fun actualizarEstadisticas() {
         viewModelScope.launch {
             try {
+                // 🎬 Activar indicador de progreso
+                _isLoading.value = true
+                _loadingMessage.value = "Generando resumen..."
+
+                // Simular delay para mostrar el indicador (en producción esto sería real)
+                kotlinx.coroutines.delay(2500)
+
                 val todasMascotas = mascotaService.obtenerTodasMascotas()
                 val todasConsultas = consultaService.obtenerTodasConsultas()
                 val todosDuenos = duenoService.obtenerTodosDuenos()
@@ -284,7 +305,30 @@ class VetClinicViewModel : ViewModel() {
                 )
             } catch (e: Exception) {
                 _messageState.value = "Error al actualizar estadísticas: ${e.message}"
+            } finally {
+                // 🎬 Desactivar indicador de progreso
+                _isLoading.value = false
             }
+        }
+    }
+
+    /**
+     * 🎬 Método helper para operaciones con loading
+     * Ejecuta una operación mostrando indicador de progreso
+     *
+     * @param loadingMsg Mensaje a mostrar durante la carga
+     * @param operation Operación suspendida a ejecutar
+     */
+    private suspend fun <T> withLoading(
+        loadingMsg: String,
+        operation: suspend () -> T
+    ): T {
+        _isLoading.value = true
+        _loadingMessage.value = loadingMsg
+        return try {
+            operation()
+        } finally {
+            _isLoading.value = false
         }
     }
 
@@ -296,4 +340,3 @@ class VetClinicViewModel : ViewModel() {
         actualizarEstadisticas()
     }
 }
-

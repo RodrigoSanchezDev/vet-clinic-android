@@ -9,7 +9,6 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -27,9 +26,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.vet_clinic_android.ui.components.BannerCard
 import com.example.vet_clinic_android.ui.navigation.Screen
-import com.example.vet_clinic_android.ui.theme.MenuCardDefaults
+import com.example.vet_clinic_android.ui.theme.AnimationSpecs
 import com.example.vet_clinic_android.ui.viewmodels.VetClinicViewModel
 
 /**
@@ -46,12 +44,31 @@ fun HomeScreen(
     // Observar estadísticas
     val estadisticas by viewModel.estadisticas.collectAsState()
 
+    // 🎬 Observar estado de carga
+    val isLoading by viewModel.isLoading.collectAsState()
+    val loadingMessage by viewModel.loadingMessage.collectAsState()
+
     // Estado para controlar si el resumen está expandido
     var resumenExpandido by remember { mutableStateOf(true) }
 
-    // Actualizar estadísticas al entrar
+    // 🍔 Estado del menú dropdown hamburguesa
+    var menuExpanded by remember { mutableStateOf(false) }
+
+    // 🎬 Estados de animación Fade In escalonado para elementos principales
+    var showBanner by remember { mutableStateOf(false) }
+    var showResumen by remember { mutableStateOf(false) }
+    var showMenuGrid by remember { mutableStateOf(false) }
+
+    // 🎬 Secuencia de animaciones Fade In al cargar la pantalla
     LaunchedEffect(Unit) {
         viewModel.actualizarEstadisticas()
+        // Animaciones escalonadas suaves
+        kotlinx.coroutines.delay(100)
+        showBanner = true
+        kotlinx.coroutines.delay(150)
+        showResumen = true
+        kotlinx.coroutines.delay(100)
+        showMenuGrid = true
     }
 
     Scaffold(
@@ -70,6 +87,87 @@ fun HomeScreen(
                         )
                     }
                 },
+                actions = {
+                    // 🍔 Botón hamburguesa
+                    IconButton(
+                        onClick = { menuExpanded = true }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Menu,
+                            contentDescription = "Menú de navegación",
+                            tint = MaterialTheme.colorScheme.onPrimary
+                        )
+                    }
+
+                    // 🍔 DropdownMenu profesional con TODAS las opciones
+                    DropdownMenu(
+                        expanded = menuExpanded,
+                        onDismissRequest = { menuExpanded = false },
+                        modifier = Modifier
+                            .width(320.dp)
+                            .heightIn(max = 500.dp)
+                    ) {
+                        // Header del menú
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            color = MaterialTheme.colorScheme.primaryContainer
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Pets,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                    modifier = Modifier.size(32.dp)
+                                )
+                                Column {
+                                    Text(
+                                        text = "Menú Principal",
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                                    )
+                                    Text(
+                                        text = "Acceso rápido a todas las funciones",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
+                                    )
+                                }
+                            }
+                        }
+
+                        Divider()
+
+                        // ✅ TODAS las 19 opciones del menú
+                        menuOptions.forEach { option ->
+                            DropdownMenuItem(
+                                text = {
+                                    Text(
+                                        text = option.title,
+                                        style = MaterialTheme.typography.bodyMedium
+                                    )
+                                },
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = option.icon,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                                },
+                                onClick = {
+                                    menuExpanded = false
+                                    navController.navigate(option.route)
+                                },
+                                modifier = Modifier.padding(horizontal = 8.dp)
+                            )
+                        }
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary
@@ -77,188 +175,205 @@ fun HomeScreen(
             )
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(16.dp)
-        ) {
-            // Banner de bienvenida con gradiente moderno
-            Box(
+        Box(modifier = Modifier.fillMaxSize()) {
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 12.dp)
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(
-                        Brush.horizontalGradient(
-                            colors = listOf(
-                                MaterialTheme.colorScheme.primary,
-                                MaterialTheme.colorScheme.primaryContainer
-                            )
-                        )
-                    )
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .padding(16.dp)
             ) {
-                Row(
+                // 🎬 Banner de bienvenida con Fade In + Slide Up
+                AnimatedVisibility(
+                visible = showBanner,
+                enter = AnimationSpecs.enterFadeSlideUp(
+                    duration = AnimationSpecs.DURATION_NORMAL,
+                    initialOffsetY = 20.dp
+                )
+            ) {
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(20.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                        .padding(bottom = 12.dp)
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(
+                            Brush.horizontalGradient(
+                                colors = listOf(
+                                    MaterialTheme.colorScheme.primary,
+                                    MaterialTheme.colorScheme.primaryContainer
+                                )
+                            )
+                        )
                 ) {
-                    // Círculo decorativo con icono
-                    Box(
+                    Row(
                         modifier = Modifier
-                            .size(56.dp)
-                            .clip(CircleShape)
-                            .background(Color.White.copy(alpha = 0.2f)),
-                        contentAlignment = Alignment.Center
+                            .fillMaxWidth()
+                            .padding(20.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.Pets,
-                            contentDescription = null,
-                            tint = Color.White,
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                    Column(
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text(
-                            text = "Pet Care",
-                            style = MaterialTheme.typography.headlineSmall,
-                            color = Color.White,
-                            fontWeight = FontWeight.ExtraBold
-                        )
-                        Text(
-                            text = "Gestión Veterinaria",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = Color.White.copy(alpha = 0.9f)
-                        )
+                        // Círculo decorativo con icono
+                        Box(
+                            modifier = Modifier
+                                .size(56.dp)
+                                .clip(CircleShape)
+                                .background(Color.White.copy(alpha = 0.2f)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Pets,
+                                contentDescription = null,
+                                tint = Color.White,
+                                modifier = Modifier.size(32.dp)
+                            )
+                        }
+                        Column(
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(
+                                text = "Pet Care",
+                                style = MaterialTheme.typography.headlineSmall,
+                                color = Color.White,
+                                fontWeight = FontWeight.ExtraBold
+                            )
+                            Text(
+                                text = "Gestión Veterinaria",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = Color.White.copy(alpha = 0.9f)
+                            )
+                        }
                     }
                 }
             }
 
-            // Card de resumen rápido COLAPSABLE (Requisito Semana 4)
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 16.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.tertiary // Rosa vibrante para texto blanco
-                ),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+            // 🎬 Card de resumen rápido con Fade In + Slide Up
+            AnimatedVisibility(
+                visible = showResumen,
+                enter = AnimationSpecs.enterFadeSlideUp(
+                    duration = AnimationSpecs.DURATION_NORMAL,
+                    initialOffsetY = 15.dp
+                )
             ) {
-                Column(
-                    modifier = Modifier.fillMaxWidth()
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.tertiary // Rosa vibrante para texto blanco
+                    ),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
                 ) {
-                    // Header del resumen (siempre visible)
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { resumenExpandido = !resumenExpandido }
-                            .padding(16.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+                    Column(
+                        modifier = Modifier.fillMaxWidth()
                     ) {
+                        // Header del resumen (siempre visible)
                         Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Dashboard,
-                                contentDescription = null,
-                                tint = Color.White,
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Text(
-                                text = "Resumen Rápido",
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
-                        }
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            IconButton(
-                                onClick = { navController.navigate(Screen.Resumen.route) },
-                                modifier = Modifier.size(32.dp)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.OpenInNew,
-                                    contentDescription = "Abrir pantalla completa",
-                                    tint = Color.White,
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            }
-                            Icon(
-                                imageVector = if (resumenExpandido) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
-                                contentDescription = if (resumenExpandido) "Contraer" else "Expandir",
-                                tint = Color.White
-                            )
-                        }
-                    }
-
-                    // Contenido colapsable con animación
-                    AnimatedVisibility(
-                        visible = resumenExpandido,
-                        enter = expandVertically() + fadeIn(),
-                        exit = shrinkVertically() + fadeOut()
-                    ) {
-                        Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                                .clickable { resumenExpandido = !resumenExpandido }
+                                .padding(16.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Divider(
-                                modifier = Modifier.padding(bottom = 12.dp),
-                                color = Color.White.copy(alpha = 0.3f)
-                            )
                             Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceEvenly
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                ResumenQuickStat(
-                                    label = "Mascotas",
-                                    value = estadisticas.totalMascotas.toString(),
-                                    textColor = Color.White
+                                Icon(
+                                    imageVector = Icons.Default.Dashboard,
+                                    contentDescription = null,
+                                    tint = Color.White,
+                                    modifier = Modifier.size(24.dp)
                                 )
-                                ResumenQuickStat(
-                                    label = "Consultas",
-                                    value = estadisticas.totalConsultas.toString(),
-                                    textColor = Color.White
-                                )
-                                ResumenQuickStat(
-                                    label = "Pendientes",
-                                    value = estadisticas.consultasPendientes.toString(),
-                                    textColor = Color.White
+                                Text(
+                                    text = "Resumen Rápido",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.White
                                 )
                             }
-                            if (estadisticas.ultimoDuenoNombre != "Ninguno") {
-                                Spacer(modifier = Modifier.height(12.dp))
-                                Surface(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    shape = MaterialTheme.shapes.small,
-                                    color = Color.White.copy(alpha = 0.2f)
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                IconButton(
+                                    onClick = { navController.navigate(Screen.Resumen.route) },
+                                    modifier = Modifier.size(32.dp)
                                 ) {
-                                    Row(
-                                        modifier = Modifier.padding(8.dp),
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                    Icon(
+                                        imageVector = Icons.Default.OpenInNew,
+                                        contentDescription = "Abrir pantalla completa",
+                                        tint = Color.White,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                }
+                                Icon(
+                                    imageVector = if (resumenExpandido) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                                    contentDescription = if (resumenExpandido) "Contraer" else "Expandir",
+                                    tint = Color.White
+                                )
+                            }
+                        }
+
+                        // Contenido colapsable con animación
+                        AnimatedVisibility(
+                            visible = resumenExpandido,
+                            enter = expandVertically() + fadeIn(),
+                            exit = shrinkVertically() + fadeOut()
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                            ) {
+                                Divider(
+                                    modifier = Modifier.padding(bottom = 12.dp),
+                                    color = Color.White.copy(alpha = 0.3f)
+                                )
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceEvenly
+                                ) {
+                                    ResumenQuickStat(
+                                        label = "Mascotas",
+                                        value = estadisticas.totalMascotas.toString(),
+                                        textColor = Color.White
+                                    )
+                                    ResumenQuickStat(
+                                        label = "Consultas",
+                                        value = estadisticas.totalConsultas.toString(),
+                                        textColor = Color.White
+                                    )
+                                    ResumenQuickStat(
+                                        label = "Pendientes",
+                                        value = estadisticas.consultasPendientes.toString(),
+                                        textColor = Color.White
+                                    )
+                                }
+                                if (estadisticas.ultimoDuenoNombre != "Ninguno") {
+                                    Spacer(modifier = Modifier.height(12.dp))
+                                    Surface(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        shape = MaterialTheme.shapes.small,
+                                        color = Color.White.copy(alpha = 0.2f)
                                     ) {
-                                        Icon(
-                                            imageVector = Icons.Default.Person,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(16.dp),
-                                            tint = Color.White.copy(alpha = 0.9f)
-                                        )
-                                        Text(
-                                            text = "Último registro: ${estadisticas.ultimoDuenoNombre}",
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = Color.White.copy(alpha = 0.9f),
-                                            fontWeight = FontWeight.Medium
-                                        )
+                                        Row(
+                                            modifier = Modifier.padding(8.dp),
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                        ) {
+                                            Icon(
+                                                imageVector = Icons.Default.Person,
+                                                contentDescription = null,
+                                                modifier = Modifier.size(16.dp),
+                                                tint = Color.White.copy(alpha = 0.9f)
+                                            )
+                                            Text(
+                                                text = "Último registro: ${estadisticas.ultimoDuenoNombre}",
+                                                style = MaterialTheme.typography.bodySmall,
+                                                color = Color.White.copy(alpha = 0.9f),
+                                                fontWeight = FontWeight.Medium
+                                            )
+                                        }
                                     }
                                 }
                             }
@@ -267,22 +382,58 @@ fun HomeScreen(
                 }
             }
 
-            // Grid de opciones del menú
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.fillMaxSize()
-            ) {
-                items(menuOptions) { option ->
-                    MenuOptionCard(
-                        option = option,
-                        onClick = {
-                            navController.navigate(option.route)
-                        }
+                // 🎬 Grid de opciones con Fade In + animaciones escalonadas por item
+                AnimatedVisibility(
+                    visible = showMenuGrid,
+                    enter = AnimationSpecs.enterFadeIn(
+                        duration = AnimationSpecs.DURATION_NORMAL
                     )
+                ) {
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        items(menuOptions.size) { index ->
+                            val option = menuOptions[index]
+                            // 🎬 Cada card aparece con delay escalonado
+                            var itemVisible by remember { mutableStateOf(false) }
+
+                            LaunchedEffect(showMenuGrid) {
+                                kotlinx.coroutines.delay(
+                                    com.example.vet_clinic_android.ui.theme.calculateStaggerDelay(
+                                        index,
+                                        delayPerItem = AnimationSpecs.STAGGER_DELAY_SHORT
+                                    ).toLong()
+                                )
+                                itemVisible = true
+                            }
+
+                            AnimatedVisibility(
+                                visible = itemVisible,
+                                enter = AnimationSpecs.enterFadeScale(
+                                    duration = AnimationSpecs.DURATION_NORMAL,
+                                    initialScale = 0.8f
+                                )
+                            ) {
+                                MenuOptionCard(
+                                    option = option,
+                                    onClick = {
+                                        navController.navigate(option.route)
+                                    }
+                                )
+                            }
+                        }
+                    }
                 }
             }
+
+            // 🎬 Loading Overlay profesional centrado
+            com.example.vet_clinic_android.ui.components.LoadingOverlay(
+                isLoading = isLoading,
+                message = loadingMessage
+            )
         }
     }
 }

@@ -38,6 +38,7 @@ private data class MedicamentoData(
 @Composable
 fun EstadisticasVeterinariosScreen(
     navController: NavController,
+    @Suppress("UNUSED_PARAMETER")
     viewModel: VetClinicViewModel = viewModel()
 ) {
     val veterinarios = remember {
@@ -172,6 +173,7 @@ private fun VeterinarioCard(veterinario: VeterinarioData) {
 @Composable
 fun CrearPedidoScreen(
     navController: NavController,
+    @Suppress("UNUSED_PARAMETER")
     viewModel: VetClinicViewModel = viewModel()
 ) {
     var clienteNombre by remember { mutableStateOf("") }
@@ -362,6 +364,7 @@ fun CrearPedidoScreen(
 @Composable
 fun VerPromocionesScreen(
     navController: NavController,
+    @Suppress("UNUSED_PARAMETER")
     viewModel: VetClinicViewModel = viewModel()
 ) {
     val medicamentosPromocion = remember {
@@ -521,6 +524,7 @@ private fun MedicamentoPromoCard(medicamento: MedicamentoData) {
 @Composable
 fun CombinarPedidosScreen(
     navController: NavController,
+    @Suppress("UNUSED_PARAMETER")
     viewModel: VetClinicViewModel = viewModel()
 ) {
     var pedidoCombinado by remember { mutableStateOf(false) }
@@ -701,6 +705,7 @@ fun CombinarPedidosScreen(
 @Composable
 fun CompararMedicamentosScreen(
     navController: NavController,
+    @Suppress("UNUSED_PARAMETER")
     viewModel: VetClinicViewModel = viewModel()
 ) {
     var comparado by remember { mutableStateOf(false) }
@@ -918,6 +923,7 @@ fun CompararMedicamentosScreen(
 @Composable
 fun DesestructurarClienteScreen(
     navController: NavController,
+    @Suppress("UNUSED_PARAMETER")
     viewModel: VetClinicViewModel = viewModel()
 ) {
     var desestructurado by remember { mutableStateOf(false) }
@@ -1177,6 +1183,7 @@ fun DesestructurarClienteScreen(
 @Composable
 fun DesestructurarPedidoScreen(
     navController: NavController,
+    @Suppress("UNUSED_PARAMETER")
     viewModel: VetClinicViewModel = viewModel()
 ) {
     var desestructurado by remember { mutableStateOf(false) }
@@ -1431,6 +1438,7 @@ fun DesestructurarPedidoScreen(
 @Composable
 fun ValidarDuplicadosClientesScreen(
     navController: NavController,
+    @Suppress("UNUSED_PARAMETER")
     viewModel: VetClinicViewModel = viewModel()
 ) {
     var validado by remember { mutableStateOf(false) }
@@ -1700,6 +1708,7 @@ fun ValidarDuplicadosClientesScreen(
 @Composable
 fun ValidarDuplicadosMedicamentosScreen(
     navController: NavController,
+    @Suppress("UNUSED_PARAMETER")
     viewModel: VetClinicViewModel = viewModel()
 ) {
     var validado by remember { mutableStateOf(false) }

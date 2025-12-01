@@ -79,6 +79,86 @@
 
 ---
 
+### 🧭 Sistema de Navegación Avanzado **✨ NUEVO**
+
+<table>
+<tr>
+<td width="50%">
+
+#### Menú Hamburguesa Dropdown
+- **Botón hamburguesa** en TopAppBar (todas las pantallas)
+- **Acceso completo** a las 19 funcionalidades de la app
+- **Header profesional** con branding y descripción
+- **Íconos temáticos** para cada opción del menú
+- **Scroll interno** para menú extenso (máx. 500dp)
+- **Diseño profesional** con dividers y spacing adecuado
+- **Cierre automático** al seleccionar opción
+- **Navegación directa** a cualquier pantalla
+
+</td>
+<td width="50%">
+
+#### Bottom Navigation Bar
+- **4 accesos rápidos** a funciones principales:
+  - 🏠 **Home** - Dashboard principal
+  - 📋 **Consultas** - Lista de consultas
+  - ➕ **Registrar** - Nueva consulta
+  - 📅 **Agenda** - Veterinarios
+- **Visible en todas las pantallas** (excepto Intro)
+- **Indicador visual** de pantalla activa
+- **Navegación inteligente** con gestión de back stack
+- **Diseño Material Design 3** con elevación 8dp
+- **Solo íconos** (diseño minimalista)
+- **Animaciones suaves** al cambiar de sección
+
+</td>
+</tr>
+</table>
+
+#### Características Técnicas de Navegación
+
+**Menú Dropdown:**
+```kotlin
+DropdownMenu(
+    expanded = menuExpanded,
+    onDismissRequest = { menuExpanded = false },
+    modifier = Modifier.width(320.dp).heightIn(max = 500.dp)
+) {
+    // Header con branding
+    Surface(color = MaterialTheme.colorScheme.primaryContainer) {
+        // Icono + Título + Descripción
+    }
+    Divider()
+    // 19 opciones con iconos y navegación
+    menuOptions.forEach { option ->
+        DropdownMenuItem(...)
+    }
+}
+```
+
+**Bottom Navigation:**
+```kotlin
+NavigationBar(tonalElevation = 8.dp) {
+    bottomNavItems.forEach { item ->
+        NavigationBarItem(
+            icon = { Icon(...) },
+            selected = currentRoute == item.route,
+            onClick = { /* Navegación inteligente */ }
+        )
+    }
+}
+```
+
+**Ventajas UX:**
+- ✅ **Acceso rápido** a funciones principales (bottom nav)
+- ✅ **Menú completo** disponible en cualquier momento (hamburguesa)
+- ✅ **Navegación predictiva** sin acumular pantallas
+- ✅ **Preservación de estado** entre navegaciones
+- ✅ **Back button** funciona correctamente
+- ✅ **Sin duplicados** de pantallas en el stack
+
+---
+
 ### 💾 Datos Pre-Cargados para Demostración **✨ NUEVO**
 
 <table>
@@ -240,6 +320,44 @@ fun String.validarEmail(): Boolean
 <details>
 <summary><b>Ver implementaciones de animaciones</b></summary>
 
+#### Animaciones Fade In/Out (Nueva Implementación) **✨ ACTUALIZADO**
+
+**IntroScreen - Secuencia de Bienvenida:**
+```kotlin
+// Animaciones Fade In escalonadas profesionales
+LaunchedEffect(Unit) {
+    delay(100); showLogo = true       // Logo con Fade In + Scale
+    delay(200); showTitle = true      // Título con Fade In + Slide Up
+    delay(150); showSubtitle = true   // Subtítulo con Fade In + Slide Up
+    delay(200); showButton = true     // Botón con Fade In + Scale
+}
+```
+
+**HomeScreen - Carga Fluida de Contenido:**
+```kotlin
+// Animaciones Fade In escalonadas para elementos principales
+LaunchedEffect(Unit) {
+    delay(100); showBanner = true     // Banner con Fade In + Slide Up
+    delay(150); showResumen = true    // Resumen con Fade In + Slide Up
+    delay(100); showMenuGrid = true   // Grid con Fade In
+    
+    // Cada card del menú aparece con delay escalonado (50ms)
+    items.forEachIndexed { index, item ->
+        delay(calculateStaggerDelay(index))
+        itemVisible = true  // Fade In + Scale por item
+    }
+}
+```
+
+**Transiciones Entre Pantallas (Navigation):**
+```kotlin
+// Configuradas en ScreenTransitions - Solo Fade In/Out
+enterTransition = fadeIn(DURATION_NORMAL)         // Entrada suave con fade
+exitTransition = fadeOut(DURATION_FAST)           // Salida rápida con fade
+popEnterTransition = fadeIn(DURATION_FAST)        // Vuelta rápida con fade
+popExitTransition = fadeOut(DURATION_NORMAL)      // Retroceso suave con fade
+```
+
 #### Spring Animations (Efecto Rebote)
 ```kotlin
 val scale by animateFloatAsState(
@@ -262,30 +380,286 @@ val elevation by animateDpAsState(
 )
 ```
 
+#### Sistema de Animaciones Centralizado
+
+**AnimationSpecs.kt - Especificaciones Profesionales:**
+- ⏱️ **Duraciones:** FAST (150ms), NORMAL (300ms), SLOW (400ms)
+- 🎯 **Easings:** Standard, Decelerate, Accelerate, Emphasized
+- 📍 **Delays Escalonados:** SHORT (50ms), MEDIUM (100ms), LONG (150ms)
+- 🎨 **Transiciones Preconfiguradas:**
+  - `enterFadeSlideUp()` - Entrada elegante desde abajo
+  - `exitFadeSlideUp()` - Salida elegante hacia arriba
+  - `enterFadeScale()` - Entrada con zoom
+  - `exitFadeScale()` - Salida con zoom
+  - `enterSlideLeft()` - Navegación horizontal
+  - `enterFadeIn()` / `exitFadeOut()` - Fade simple
+
 #### Efectos Hover Implementados
 
 **Botones:**
-- Escala: 100% → 95% al presionar
-- Elevación: 8dp → 16dp
+- Escala: 100% → 95% al presionar (Spring)
+- Elevación: 8dp → 16dp (Tween 150ms)
 - Duración: 150-200ms
 - Easing: Spring con rebote medio
 
 **Cards del Menú:**
-- Escala card: 100% → 95%
-- Escala icono: 100% → 110%
-- Elevación: 6dp → 12dp
+- Escala card: 100% → 95% (Spring)
+- Escala icono: 100% → 110% (Spring independiente)
+- Elevación: 6dp → 12dp (Tween 200ms)
 - Fondo icono: alpha 0.2 → 0.3
+- **Entrada:** Fade In + Scale con delay escalonado (50ms por item)
 
 **Gradientes:**
-- Vertical: Primary → PrimaryContainer
-- Horizontal: Primary → PrimaryContainer
+- Vertical: Primary → PrimaryContainer (IntroScreen)
+- Horizontal: Primary → PrimaryContainer (HomeScreen Banner)
 - Círculos concéntricos con alpha 0.2 y 0.3
 
 #### Microinteracciones
-- ✅ Feedback visual inmediato al toque
+
+- ✅ Feedback visual inmediato al toque (<200ms)
 - ✅ Animaciones de iconos independientes
-- ✅ Colapsado/Expandido con fade + slide
+- ✅ Colapsado/Expandido con fade + slide (Card Resumen)
 - ✅ Ripple effect nativo de Material
+- ✅ **Fade In escalonado** en IntroScreen (4 elementos)
+- ✅ **Fade In secuencial** en HomeScreen (Banner → Resumen → Grid)
+- ✅ **Staggered animations** en grid de menú (19 items con delay 50ms)
+- ✅ **Fade Out al navegar** desde IntroScreen
+- ✅ **Transiciones suaves** entre todas las pantallas (Navigation Compose)
+
+#### Implementación Técnica
+
+**AnimatedVisibility con configuración profesional:**
+```kotlin
+AnimatedVisibility(
+    visible = showElement,
+    enter = AnimationSpecs.enterFadeSlideUp(
+        duration = AnimationSpecs.DURATION_NORMAL,
+        initialOffsetY = 20.dp
+    ),
+    exit = AnimationSpecs.exitFadeSlideUp(
+        duration = AnimationSpecs.DURATION_FAST
+    )
+) {
+    // Contenido animado
+}
+```
+
+**Animaciones escalonadas para listas:**
+```kotlin
+LaunchedEffect(showGrid) {
+    delay(calculateStaggerDelay(index, delayPerItem = 50).toLong())
+    itemVisible = true
+}
+```
+
+#### Pantallas con Animaciones Completas
+
+| Pantalla | Animación Entrada | Animación Salida | Elementos Animados |
+|----------|-------------------|------------------|---------------------|
+| **IntroScreen** | Fade In escalonado (4 elementos) | Fade Out en botón | Logo, Título, Subtítulo, Botón |
+| **HomeScreen** | Fade In secuencial (3 secciones) | Fade Out (Navigation) | Banner, Resumen, Grid (19 items) |
+| **Todas las pantallas** | Fade In suave | Fade Out rápido | Transición Navigation |
+
+</details>
+
+---
+
+### 🔄 Indicadores de Progreso **✨ NUEVO**
+
+<details>
+<summary><b>Ver implementación de progress indicators</b></summary>
+
+#### Sistema de Loading Indicators Profesional
+
+La aplicación incluye un sistema completo de indicadores de progreso que se muestra dinámicamente durante operaciones asíncronas como la carga de datos, generación de resúmenes y procesamiento de información.
+
+#### Componentes de Loading
+
+**LoadingIndicator - Modal Dialog:**
+```kotlin
+LoadingIndicator(
+    isLoading = isLoading,
+    message = "Cargando datos...",
+    isModal = true,
+    useLinearProgress = false
+)
+```
+
+**LoadingOverlay - Overlay de pantalla completa:**
+```kotlin
+LoadingOverlay(
+    isLoading = isLoading,
+    message = "Generando resumen..."
+)
+```
+
+**InlineLoadingIndicator - Indicador inline:**
+```kotlin
+InlineLoadingIndicator(
+    isLoading = isLoading,
+    message = "Procesando..."
+)
+```
+
+**PulsingDot - Indicador minimalista:**
+```kotlin
+PulsingDot(isLoading = isLoading)
+```
+
+#### Integración con ViewModel
+
+**Estado reactivo de carga:**
+```kotlin
+// En VetClinicViewModel
+private val _isLoading = MutableStateFlow(false)
+val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
+private val _loadingMessage = MutableStateFlow("Cargando...")
+val loadingMessage: StateFlow<String> = _loadingMessage.asStateFlow()
+```
+
+**Uso en operaciones asíncronas:**
+```kotlin
+fun actualizarEstadisticas() {
+    viewModelScope.launch {
+        try {
+            // Activar indicador
+            _isLoading.value = true
+            _loadingMessage.value = "Generando resumen..."
+            
+            delay(800) // Simular operación
+            
+            // Cargar datos
+            val mascotas = mascotaService.obtenerTodasMascotas()
+            val consultas = consultaService.obtenerTodasConsultas()
+            
+            // Actualizar estado
+            _estadisticas.value = ResumenEstadisticas(...)
+        } finally {
+            // Desactivar indicador
+            _isLoading.value = false
+        }
+    }
+}
+```
+
+#### Mensajes Personalizados Implementados
+
+| Operación | Mensaje | Duración |
+|-----------|---------|----------|
+| **Carga inicial** | "Cargando datos..." | Variable |
+| **Generar resumen** | "Generando resumen..." | ~800ms |
+| **Procesar consultas** | "Procesando consultas..." | Variable |
+| **Actualizar estadísticas** | "Actualizando información..." | ~800ms |
+| **Guardar datos** | "Guardando..." | Variable |
+
+#### Características Técnicas
+
+<table>
+<tr>
+<td width="50%">
+
+**CircularProgressIndicator:**
+- Tamaño: 48dp
+- StrokeWidth: 4dp
+- Color: Primary theme
+- Animación: Infinita, suave
+- Uso: Modal dialogs
+
+**LinearProgressIndicator:**
+- Altura: 4dp
+- Width: 100%
+- Color: Primary theme
+- TrackColor: SurfaceVariant
+- Uso: Headers, barras
+
+</td>
+<td width="50%">
+
+**Animaciones:**
+- Fade In: 300ms
+- Fade Out: 300ms
+- Easing: Tween
+- Hardware accelerated: ✅
+
+**Estado:**
+- StateFlow reactivo
+- collectAsState() en UI
+- Actualización automática
+- Thread-safe
+
+</td>
+</tr>
+</table>
+
+#### Ventajas del Sistema
+
+- ✅ **Feedback inmediato** al usuario
+- ✅ **Mensajes contextuales** para cada operación
+- ✅ **Bloqueo de UI** durante operaciones críticas
+- ✅ **Animaciones suaves** con fade in/out
+- ✅ **Reactivo** mediante StateFlow
+- ✅ **Reutilizable** en toda la app
+- ✅ **Configurable** (modal, overlay, inline)
+- ✅ **Material Design 3** compliant
+
+#### Pantallas con Loading Indicators
+
+| Pantalla | Tipo de Indicador | Mensaje |
+|----------|-------------------|---------|
+| **HomeScreen** | Inline | "Generando resumen..." |
+| **ResumenScreen** | Modal | "Cargando estadísticas..." |
+| **RegisterConsulta** | Modal | "Guardando consulta..." |
+| **ListConsultas** | Inline | "Cargando consultas..." |
+| **Todas las pantallas** | Configurable | Personalizable |
+
+#### Ejemplo de Uso Completo
+
+**En una pantalla:**
+```kotlin
+@Composable
+fun MiPantalla(viewModel: VetClinicViewModel) {
+    val isLoading by viewModel.isLoading.collectAsState()
+    val loadingMessage by viewModel.loadingMessage.collectAsState()
+    
+    Box(modifier = Modifier.fillMaxSize()) {
+        // Contenido principal
+        ContenidoPrincipal()
+        
+        // Indicador de carga
+        LoadingIndicator(
+            isLoading = isLoading,
+            message = loadingMessage,
+            isModal = true
+        )
+    }
+}
+```
+
+**En el ViewModel:**
+```kotlin
+fun cargarDatos() {
+    viewModelScope.launch {
+        _isLoading.value = true
+        _loadingMessage.value = "Cargando datos..."
+        try {
+            // Operación asíncrona
+            val datos = repository.obtenerDatos()
+            _datos.value = datos
+        } finally {
+            _isLoading.value = false
+        }
+    }
+}
+```
+
+#### Performance
+
+- **Recomposiciones mínimas** gracias a StateFlow
+- **Animaciones 60fps** hardware-accelerated
+- **No blocking** del hilo principal
+- **Coroutines** para operaciones asíncronas
+- **Lazy loading** de componentes
 
 </details>
 
@@ -396,7 +770,9 @@ vet-clinic-android/
 │   │   │   ├── ui/                 # 🎨 Capa de presentación
 │   │   │   │   ├── components/     # Componentes reutilizables
 │   │   │   │   │   ├── BannerCard.kt
-│   │   │   │   │   └── HoverButton.kt (Nuevo - Botones con animaciones)
+│   │   │   │   │   ├── BottomNavigationBar.kt (Nuevo - Nav bar global)
+│   │   │   │   │   ├── HoverButton.kt (Nuevo - Botones con animaciones)
+│   │   │   │   │   └── VetClinicScaffold.kt (Nuevo - Scaffold wrapper)
 │   │   │   │   │
 │   │   │   │   ├── screens/        # Pantallas (19 screens)
 │   │   │   │   │   ├── IntroScreen.kt (Rediseñada con gradientes)
@@ -974,6 +1350,22 @@ chore:    Tareas de mantenimiento
 - ✅ **ResumenScreen.kt** - Pantalla de estadísticas completa
 - ✅ **ComponentStyles.kt** - Estilos centralizados (AppSpacing, AppCorners, AppElevation)
 - ✅ **ResumenQuickStat** - Componente de estadística rápida con color personalizable
+- ✅ **BottomNavigationBar.kt** - Barra de navegación inferior global
+- ✅ **VetClinicScaffold.kt** - Scaffold wrapper reutilizable
+
+#### 🧭 Sistema de Navegación Avanzado
+- ✅ **Menú hamburguesa dropdown** en TopAppBar
+  - Acceso a las 19 funcionalidades completas
+  - Header profesional con branding
+  - Íconos temáticos para cada opción
+  - Scroll interno para menús extensos
+- ✅ **Bottom Navigation Bar** visible en todas las pantallas
+  - 4 accesos rápidos (Home, Consultas, Registrar, Agenda)
+  - Solo íconos (diseño minimalista MD3)
+  - Indicador visual de pantalla activa
+  - Navegación inteligente con gestión de back stack
+  - Preservación de estado entre navegaciones
+  - Animaciones suaves al cambiar secciones
 
 #### 🌐 Internacionalización
 - ✅ **Textos en español** en IntroScreen
@@ -1016,7 +1408,7 @@ El proyecto cumple **100%** con todos los requisitos de la Actividad Semana 4:
 | **Kotlin Coroutines** | 1.7.3 | ✅ Operaciones asíncronas |
 | **Navigation Compose** | 2.7.5 | ✅ 19 pantallas navegables |
 | **Material Design 3** | 1.1.2 | ✅ Sistema de diseño completo |
-| **Desugaring (API 24)** | 2.0.4 | ✅ Compatibilidad extendida |
+| **Desugaring (Compatibilidad API 24)** | 2.0.4 | ✅ Compatibilidad extendida |
 
 **Por qué StateFlow:** API moderna de Kotlin, integración perfecta con Compose, type-safe, y lifecycle-aware con `collectAsState()`.
 
@@ -1238,4 +1630,3 @@ Ver el archivo [LICENSE](./LICENSE) para más detalles.
 [🔝 Volver arriba](#-vet-clinic-android)
 
 </div>
-
